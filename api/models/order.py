@@ -6,6 +6,7 @@ from .signup import Signup
 from .accomodation import Accomodation
 from .food import Food
 from .workshop import Workshop
+from .orderToWorkshop import OrderToWorkshop
 
 
 def generate_symvar():
@@ -20,7 +21,11 @@ class Order(Base):
 
     signup = models.ForeignKey(Signup, related_name="orders")
     symvar = models.CharField(max_length=63, blank=True)
-    workshops = models.ManyToManyField(Workshop)
+    workshops = models.ManyToManyField(
+        Workshop,
+        through=OrderToWorkshop,
+        verbose_name="workshop assigned to this order with sequence number",
+    )
     food = models.ManyToManyField(Food)
     accomodation = models.ManyToManyField(Accomodation)
     price = models.PositiveIntegerField()

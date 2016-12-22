@@ -123,6 +123,19 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
+            name='OrderToWorkshop',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('createdAt', models.DateTimeField()),
+                ('updatedAt', models.DateTimeField()),
+                ('sequence', models.PositiveIntegerField(verbose_name='sequence number of workshop in order')),
+                ('order', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.Order', verbose_name='assigned order')),
+            ],
+            options={
+                'abstract': False,
+            },
+        ),
+        migrations.CreateModel(
             name='Payment',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
@@ -202,6 +215,11 @@ class Migration(migrations.Migration):
             field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='api.Workshop'),
         ),
         migrations.AddField(
+            model_name='ordertoworkshop',
+            name='workshop',
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.Workshop', verbose_name='assigned workshop'),
+        ),
+        migrations.AddField(
             model_name='order',
             name='signup',
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='orders', to='api.Signup'),
@@ -209,6 +227,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='order',
             name='workshops',
-            field=models.ManyToManyField(to='api.Workshop'),
+            field=models.ManyToManyField(through='api.OrderToWorkshop', to='api.Workshop', verbose_name='workshop assigned to this order with sequence number'),
         ),
     ]

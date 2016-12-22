@@ -7,6 +7,7 @@ from .foodPhoto import FoodPhoto
 from .lector import Lector
 from .lectorPhoto import LectorPhoto
 from .order import Order
+from .orderToWorkshop import OrderToWorkshop
 from .payment import Payment
 from .signup import Signup
 from .workshop import Workshop
@@ -20,6 +21,7 @@ __all__ = (
     Lector,
     LectorPhoto,
     Order,
+    OrderToWorkshop,
     Payment,
     Signup,
     Workshop,

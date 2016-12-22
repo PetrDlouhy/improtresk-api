@@ -1,7 +1,7 @@
 """Site administration module."""
 from django.contrib import admin
 from .models import Accomodation, AccomodationPhoto, Food, FoodPhoto, \
-    Lector, LectorPhoto, Payment, Signup, Workshop, WorkshopPhoto
+    Lector, LectorPhoto, Order, OrderToWorkshop, Payment, Signup, Workshop, WorkshopPhoto
 
 
 DEFAULT_READONLY = ['createdAt', 'updatedAt']
@@ -115,3 +115,15 @@ class SignupAdmin(BaseAdminModel):
     """Admin model for Signups."""
 
     pass
+
+
+class TeachSubjectInline(admin.TabularInline):
+    model = OrderToWorkshop
+    readonly_fields = ("createdAt", "updatedAt")
+
+
+@admin.register(Order)
+class OrderAdmin(BaseAdminModel):
+    """Admin model for Orders."""
+
+    inlines = (TeachSubjectInline,)
