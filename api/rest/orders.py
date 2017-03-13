@@ -73,6 +73,12 @@ class CreateOrderSerializer(serializers.Serializer):
 class CreateOrderViewSet(viewsets.ViewSet):
     serializer_class = CreateOrderSerializer
 
+    def retrieve(self, request, *args, **kwargs):
+        order = self.get_object()
+        if 'payment_id' in request.GET:
+            order.confirm(request.GET['payment_id'])
+        return super().retrieve(request, *args, **kwargs)
+
     def create(self, request):
         serializer = CreateOrderSerializer(data=request.data)
         serializer.user = request.user

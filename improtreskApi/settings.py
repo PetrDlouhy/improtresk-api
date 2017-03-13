@@ -168,6 +168,13 @@ EMAIL_SENDER = 'info@improtresk.cz'
 
 YEAR = 2017
 RESERVATION_DURATION_SHORT = datetime.timedelta(hours=3)
+RESERVATION_DURATION_PAYMENT = datetime.timedelta(days=3)
+
+
+GOPAY_ID = os.environ.get('DJANGO_GOPAY_ID', '')
+GOPAY_CLIENT_ID = os.environ.get('DJANGO_GOPAY_CLIENT_ID', '')
+GOPAY_CLIENT_SECRET = os.environ.get('DJANGO_GOPAY_CLIENT_SECRET', '')
+GOPAY_PRODUCTION_MODE = os.environ.get('DJANGO_GOPAY_PRODUCTION_MODE', False)
 
 AUTH_LDAP_SERVER_URI = os.environ.get('DJANGO_LDAP_SERVERI_URI', '')
 AUTH_LDAP_BIND_DN = os.environ.get('DJANGO_LDAP_BIND_DN', '')
